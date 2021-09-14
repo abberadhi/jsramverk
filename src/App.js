@@ -5,19 +5,17 @@ import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 
 function App () {
   const [myEditor, setMyEditor] = useState(null);
+                // onClick={ () => console.log(myEditor.getData())}
 
   return (
     <div className="App">
 
         <nav className="navbar">
-            <div>
-                GENERIC EDITOR
-            </div>
-            <ul className="list">
-                <li className="save-button"
-                onClick={ () => console.log(myEditor.getData())}>
-                    <p>Save</p>
-                    {/* <a href="#">Contact</a> */}
+            <ul className="navbar-nav">
+                <li class="nav-item">
+                    <a href="" className="nav-link">
+                        <span class="link-text">Abbe</span>
+                    </a>
                 </li>
             </ul>
         </nav>        
