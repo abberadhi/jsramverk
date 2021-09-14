@@ -1,6 +1,9 @@
 import React, { useState } from 'react';
 import { CKEditor } from '@ckeditor/ckeditor5-react';
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faPlus } from '@fortawesome/free-solid-svg-icons'
+
 
 
 function App () {
@@ -14,7 +17,9 @@ function App () {
             <ul className="navbar-nav">
                 <li class="nav-item">
                     <a href="" className="nav-link">
-                        <span class="link-text">Abbe</span>
+                        {/* <span class="link-text">Abbe</span> */}
+                        <FontAwesomeIcon icon={faPlus} />
+                        Add
                     </a>
                 </li>
             </ul>
