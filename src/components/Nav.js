@@ -2,7 +2,7 @@ import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPlus, faFileWord } from '@fortawesome/free-solid-svg-icons'
 
-function Nav () {
+export default Nav => {
     return (
         <nav className="navbar">
             <ul className="navbar-nav">
@@ -31,4 +31,4 @@ function Nav () {
     );
 }
 
-export default Nav;
+// export default Nav;
