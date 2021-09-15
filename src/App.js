@@ -9,7 +9,9 @@ function App () {
 
     return (
         <div className="App">
-            <Nav myEditor={myEditor}></Nav>
+            <header>
+                <Nav myEditor={myEditor}></Nav>
+            </header>
             <CKEditor
                 editor={ ClassicEditor }
                 data="<p>Hello from CKEditor 5!</p>"
