@@ -8,7 +8,9 @@ function Nav (data) {
 
             <ul className="navbar-nav">
                 <li
-                onClick={ () => console.log(data.myEditor.getData())} 
+                onClick={ () => {
+                    console.log(data.myEditor.getData());
+                }} 
                 className="nav-item add"
                 >
                     <div className="nav-link">
