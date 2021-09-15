@@ -58,9 +58,9 @@ body::-webkit-scrollbar-thumb {
 }
 
 /* makes last element on the very bottom */
-.nav-item:last-child {
+/* .nav-item:last-child {
   margin-top: auto;
-}
+} */
 
 .nav-link {
   display: flex;

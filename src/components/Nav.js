@@ -2,33 +2,30 @@ import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPlus, faFileWord } from '@fortawesome/free-solid-svg-icons'
 
-export default Nav => {
+function Nav (data) {
     return (
         <nav className="navbar">
             <ul className="navbar-nav">
-                <li className="nav-item">
-                    <a href="" className="nav-link">
+                <li
+                onClick={ () => console.log(data.myEditor.getData())} 
+                className="nav-item"
+                >
+                    <div className="nav-link">
                         {/* <span class="link-text">Abbe</span> */}
                         <FontAwesomeIcon size="lg" icon={faPlus} />
-                    </a>
+                    </div>
                 </li>
 
                 <li className="nav-item">
-                    <a href="" className="nav-link">
+                    <div className="nav-link">
                         {/* <span class="link-text">Abbe</span> */}
                         <FontAwesomeIcon size="lg" icon={faFileWord} />
-                    </a>
-                </li>
-
-                                    <li className="nav-item">
-                    <a href="" className="nav-link">
-                        {/* <span class="link-text">Abbe</span> */}
-                        <FontAwesomeIcon size="lg" icon={faFileWord} />
-                    </a>
+                    </div>
                 </li>
             </ul>
         </nav>        
     );
 }
 
-// export default Nav;
+export default Nav;
+

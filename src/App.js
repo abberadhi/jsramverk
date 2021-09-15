@@ -6,9 +6,10 @@ import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 function App () {
     const [myEditor, setMyEditor] = useState(null);
                 // onClick={ () => console.log(myEditor.getData())}
+
     return (
         <div className="App">
-            <Nav></Nav>
+            <Nav myEditor={myEditor}></Nav>
             <CKEditor
                 editor={ ClassicEditor }
                 data="<p>Hello from CKEditor 5!</p>"
