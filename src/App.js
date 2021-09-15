@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import Nav from './components/Nav';
+import Popup from './components/Popup';
 import { CKEditor } from '@ckeditor/ckeditor5-react';
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 
@@ -9,6 +10,7 @@ function App () {
 
     return (
         <div className="App">
+            <Popup></Popup>
             <header>
                 <Nav myEditor={myEditor}></Nav>
             </header>
