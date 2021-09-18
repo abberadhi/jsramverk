@@ -26,12 +26,12 @@ function Nav (data) {
                     </div>
                 </li>
 
-                <li className="nav-item title">
+                {/* <li className="nav-item title">
                     <div className="nav-title">
                         <FontAwesomeIcon size="3x" icon={faFileAlt} />
                         <input className="input" type="text" placeholder="Untitled"></input>
                     </div>
-                </li>
+                </li> */}
             </ul>
         </nav>        
     );
