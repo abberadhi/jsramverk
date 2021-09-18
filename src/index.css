@@ -51,7 +51,7 @@ main {
   min-height: 90vh;
   padding: 3em 25% !important;
   font-family: 'Signika', sans-serif;
-  font-size: 2em;
+  font-size: 1.75em;
 }
 
 .ck-content > p {
@@ -124,12 +124,11 @@ main {
   margin: 5em 0 auto 5em;
   width: 95%;
   padding: 0 20% !important;
+  z-index: 2;
 
   font-family: 'Signika', sans-serif;
   font-size: 1em;
   color: #4e4e4e;
-  z-index: 2;
-
 }
 
 
@@ -142,6 +141,7 @@ input[type="text"].input
   font-family: 'Signika', sans-serif;
   font-size: 1em;
   color: #292929;
+  font-weight: bolder;
 
 }
 
