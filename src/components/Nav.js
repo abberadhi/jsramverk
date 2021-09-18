@@ -1,6 +1,7 @@
 import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPlus, faFileWord, faList } from '@fortawesome/free-solid-svg-icons'
+import { Link } from 'react-router-dom';
 
 function Nav (data) {
     return (
@@ -21,18 +22,22 @@ function Nav (data) {
                     </li>
 
                     <li className="nav-item">
-                        <div className="nav-link">
-                            {/* <span class="link-text">Abbe</span> */}
-                            <FontAwesomeIcon size="lg" icon={faFileWord} />
-                        </div>
+                        <Link to="/editor">
+                            <div className="nav-link">
+                                {/* <span class="link-text">Abbe</span> */}
+                                <FontAwesomeIcon size="lg" icon={faFileWord} />
+                            </div>
+                        </Link>
                     </li>
-                    <li className="nav-item">
-                        <div className="nav-link">
-                            {/* <span class="link-text">Abbe</span> */}
-                            <FontAwesomeIcon size="lg" icon={faList} />
-                        </div>
-                    </li>
-
+                    
+                        <li className="nav-item">
+                            <Link to="/">
+                            <div className="nav-link">
+                                {/* <span class="link-text">Abbe</span> */}
+                                <FontAwesomeIcon size="lg" icon={faList} />
+                            </div>
+                            </Link>
+                        </li>
                 </ul>
             </nav>    
         </header>    
