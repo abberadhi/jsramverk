@@ -1,6 +1,4 @@
 import React from 'react';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faFileAlt } from '@fortawesome/free-solid-svg-icons'
 
 function Overlay (data) {
     return (
@@ -17,4 +15,3 @@ function Overlay (data) {
 }
 
 export default Overlay;
-
