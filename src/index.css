@@ -49,9 +49,13 @@ main {
 
 .ck-content {
   min-height: 90vh;
-  padding: 2em 25% !important;
+  padding: 3em 25% !important;
   font-family: 'Signika', sans-serif;
   font-size: 2em;
+}
+
+.ck-content > p {
+  color: rgb(51, 51, 51);
 }
 
 .navbar {
@@ -111,14 +115,39 @@ main {
 } 
 
 .overlay {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
   position: absolute;
   background-color: transparent;
-  margin: 4em 0 auto 5em;
-  width: 100%;
-  padding: 0 10% !important;
+  margin: 5em 0 auto 5em;
+  width: 95%;
+  padding: 0 20% !important;
 
   font-family: 'Signika', sans-serif;
   font-size: 1em;
   color: #4e4e4e;
   z-index: 2;
+
+}
+
+
+input[type="text"].input
+{
+  margin-left: 0.5em;
+  background: transparent;
+  border: none;
+  border-bottom: 2px black solid;
+  font-family: 'Signika', sans-serif;
+  font-size: 1em;
+  color: #292929;
+
+}
+
+input[type="text"].input:focus {
+  background: transparent;
+  border: none;
+  outline-width: 0;
+  border-bottom: 2px white solid;
 }
