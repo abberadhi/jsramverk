@@ -10,7 +10,9 @@
 }
 
 * {
-  padding: 0; margin: 0;
+  padding: 0; 
+  margin: 0;
+  box-sizing: border-box;
 }
 
 body {
@@ -107,3 +109,16 @@ main {
 .nav-link svg {
   min-width: 2rem;
 } 
+
+.overlay {
+  position: absolute;
+  background-color: transparent;
+  margin: 4em 0 auto 5em;
+  width: 100%;
+  padding: 0 10% !important;
+
+  font-family: 'Signika', sans-serif;
+  font-size: 1em;
+  color: #4e4e4e;
+  z-index: 2;
+}

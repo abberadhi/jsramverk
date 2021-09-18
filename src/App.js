@@ -16,6 +16,7 @@ function App () {
                     myEditor={myEditor}
                 ></Nav>
             </header>
+            <Overlay></Overlay>
             <CKEditor
                 editor={ ClassicEditor }
                 data="<p>Hello from CKEditor 5!</p>"
