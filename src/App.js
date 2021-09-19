@@ -14,7 +14,7 @@ function App () {
                 myEditor={myEditor}
             ></Nav>
             <Route path="/" exact component={Home}></Route>
-            <Route path="/editor" component={Editor}></Route>
+            <Route path="/editor/:id" component={Editor}></Route>
             
         </Router>
     );

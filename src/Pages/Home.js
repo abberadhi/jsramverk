@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import axios from 'axios';
 import moment from 'moment';
-import { Link } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 
 function Home () {
     const [myEditor, setMyEditor] = useState(null);
@@ -12,7 +12,7 @@ function Home () {
     useEffect(() => {
         // axios.post('https://localhost:1337/findall').then((data) => console.log(data));
         axios.post('/findall')
-        .then(response => setDocuments(response.data));
+        .then(response => {setDocuments(response.data); console.log(response)});
     }, [])
     
         
