@@ -10,11 +10,22 @@ import axios from 'axios';
 function Editor () {
     const { id } = useParams();
     const [myEditor, setMyEditor] = useState(null);
-    const [initialDocument, setInitialDocument] = useState(null);
+    
+    // only stores the inital document, used to solve issue
+    // used to solve issue where rerenders are infinite because of `document` change.
+    const [initialDocument, setInitialDocument] = useState(null); 
+
+    // stores new document everytime it changes. Used to send post req
     const [document, setDocument] = useState(null);
+
+    // bool value for when loading animation for the entire page
     const [isLoading, setIsLoading] = useState(true);
-    const [isSaving, setIsSaving] = useState(false);
-    const [isTimeout, setIsTimeout] = useState(false);
+
+    // bool for when saving animation is triggered for last updated section
+    const [isSaving, setIsSaving] = useState(false); 
+
+    // stores autosavetimer object to be used for autosave
+    const [timeoutSave, setTimeoutSave] = useState(false);
 
     useEffect(() => {
             axios.post('/find', {"id": id})
@@ -22,7 +33,7 @@ function Editor () {
                 setDocument(response.data);
                 setInitialDocument(response.data);
             });
-            setIsTimeout(new autoSaveTimer);
+            setTimeoutSave(new autoSaveTimer);
     }, []);
 
     useEffect(() => {
@@ -33,7 +44,7 @@ function Editor () {
     }, [initialDocument, myEditor]);
 
     function saveDocument(text) {
-        isTimeout.save(() => {
+        timeoutSave.save(() => {
             const temp = {
                 updated: new Date(),
                 content: myEditor.getData(),
