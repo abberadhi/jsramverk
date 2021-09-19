@@ -5,7 +5,7 @@ function Overlay (data) {
         <div className="overlay" onClick={() => console.log("Remove Overlay")}>
             <div className="left">
             <p style={{display: "inline-block"}}>Title: </p>
-            <input defaultValue={data.title ?? "Untitled"} type="text" className="input"></input>
+            <input defaultValue={data.name ?? "Untitled"} type="text" className="input"></input>
             <p className="created">Created: {data.created ?? "Untitled"}</p>
             </div>
 

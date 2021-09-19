@@ -9,29 +9,33 @@ function Editor () {
     const { id } = useParams();
     const [myEditor, setMyEditor] = useState(null);
     const [document, setDocument] = useState(null);
-                // onClick={ () => console.log(myEditor.getData())}
 
     useEffect(() => {
-        axios.post('/find', {"id": id})
-        .then(response => {
-            setDocument(response.data);
-        });
+            axios.post('/find', {"id": id})
+            .then(response => {
+                setDocument(response.data);
+                // myEditor.setData(document.content);
+            });
     }, [])
+
+    useEffect(() => {
+        if(document && myEditor) {
+            myEditor.setData(document.content)
+        }
+    }, [document, myEditor])
 
     return (
         <div className="Editor">
             {document ? 
             <Overlay
-                title={document.title}
+                name={document.name}
                 created={document.created}
                 updated={document.updated}
             ></Overlay> : null
             }
             <CKEditor
                 editor={ ClassicEditor }
-                data="<p>Hello from CKEditor 5!</p>"
                 onReady={ editor => {
-                    console.log( 'Editor is ready to use!', editor );
                     setMyEditor(editor);
                 } }
             />
