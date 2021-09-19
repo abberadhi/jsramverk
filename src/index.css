@@ -43,7 +43,7 @@ body::-webkit-scrollbar-thumb {
 
 
 .ck-content {
-  min-height: 90vh;
+  min-height: 95vh;
   padding: 3em 25% !important;
   font-family: 'Signika', sans-serif;
   font-size: 1.75em;
@@ -203,10 +203,11 @@ input[type="text"].input:focus {
   border: 5px solid #f3f3f3;
   border-top: 5px solid var(--bg-seconary);
   border-radius: 50%;
-  width: 1em;
-  height: 1em;
+  width: 1.5em;
+  height: 1.5em;
   -webkit-animation: spin 2s linear infinite;
   position: relative;
+  display: inline-block;
 }
 
 @-webkit-keyframes spin {

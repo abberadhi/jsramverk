@@ -1,4 +1,3 @@
-import { faMarsDouble } from '@fortawesome/free-solid-svg-icons';
 import moment from 'moment';
 
 let DateUtils = {

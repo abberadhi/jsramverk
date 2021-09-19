@@ -1,6 +1,8 @@
 import React from 'react';
 import DateUtils from '../utils/DateUtils';
 
+import Loader from '../components/Loader';
+
 function Overlay (data) {
     return (
         <div className="overlay" onClick={() => console.log("Remove Overlay")}>
@@ -10,7 +12,7 @@ function Overlay (data) {
                 <p className="created">Created: {data.created ?? "Untitled"}</p>
             </div>
 
-            <p className="edited">Last updated: {DateUtils.relativeSinceDate(data.updated) ?? "Untitled"}</p>
+            <p className="edited">Last updated: {data.isSaving ? <Loader></Loader> : (DateUtils.relativeSinceDate(data.updated) ?? "Untitled")}</p>
         </div>
     );
 }

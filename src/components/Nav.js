@@ -20,24 +20,14 @@ function Nav (data) {
                             <FontAwesomeIcon size="lg" icon={faPlus} />
                         </div>
                     </li>
-
                     <li className="nav-item">
-                        <Link to="/editor">
-                            <div className="nav-link">
-                                {/* <span class="link-text">Abbe</span> */}
-                                <FontAwesomeIcon size="lg" icon={faFileWord} />
-                            </div>
+                        <Link to="/">
+                        <div className="nav-link">
+                            {/* <span class="link-text">Abbe</span> */}
+                            <FontAwesomeIcon size="lg" icon={faList} />
+                        </div>
                         </Link>
                     </li>
-                    
-                        <li className="nav-item">
-                            <Link to="/">
-                            <div className="nav-link">
-                                {/* <span class="link-text">Abbe</span> */}
-                                <FontAwesomeIcon size="lg" icon={faList} />
-                            </div>
-                            </Link>
-                        </li>
                 </ul>
             </nav>    
         </header>    
