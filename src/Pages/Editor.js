@@ -27,6 +27,9 @@ function Editor () {
     // stores autosavetimer object to be used for autosave
     const [timeoutSave, setTimeoutSave] = useState(false);
 
+    // used to avoid doc from saving on first load
+    const [initiated, setInitiated] = useState(false);
+
     useEffect(() => {
             axios.post('/find', {"id": id})
             .then(response => {
@@ -40,6 +43,7 @@ function Editor () {
         if(initialDocument && myEditor) {
             myEditor.setData(document.content)
             setIsLoading(false);
+            setInitiated(true);
         }
     }, [initialDocument, myEditor]);
 
@@ -78,7 +82,7 @@ function Editor () {
                     setMyEditor(editor);
                 } }
                 onChange={ () => {
-                    saveDocument()
+                    if (initiated) saveDocument()
                 }}
             />
         </div>
