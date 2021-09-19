@@ -23,19 +23,32 @@ function Editor () {
                 setInitialDocument(response.data);
             });
             setIsTimeout(new autoSaveTimer);
-    }, [])
+    }, []);
 
     useEffect(() => {
         if(initialDocument && myEditor) {
             myEditor.setData(document.content)
             setIsLoading(false);
         }
-    }, [initialDocument, myEditor])
+    }, [initialDocument, myEditor]);
+
+    function saveDocument(text) {
+        isTimeout.save(() => {
+            const temp = {
+                updated: new Date(),
+                content: myEditor.getData(),
+                name: text ?? document.name,
+                id: document._id,
+            }
+            setDocument({...document, ...temp});
+            axios.post('/update', {...document, ...temp});
+        }, setIsSaving);
+    }
 
     return (
         <div className="Editor">
             {isLoading ?
-                (<div class="fullscreen-loading">
+                (<div className="fullscreen-loading">
                     <Loader></Loader> 
                 </div>): null
             }
@@ -45,6 +58,7 @@ function Editor () {
                 created={document.created}
                 updated={document.updated}
                 isSaving={isSaving}
+                saveDocument={saveDocument}
             ></Overlay> : null}
 
             <CKEditor
@@ -53,15 +67,7 @@ function Editor () {
                     setMyEditor(editor);
                 } }
                 onChange={ () => {
-                    isTimeout.save(() => {
-                        const temp = {
-                            updated: new Date(),
-                            content: myEditor.getData(),
-                            id: document._id
-                        }
-                        setDocument({...document, ...temp});
-                        axios.post('/update', {...document, ...temp});
-                    }, setIsSaving);
+                    saveDocument()
                 }}
             />
         </div>
