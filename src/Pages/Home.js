@@ -18,10 +18,28 @@ function Home () {
     return (
         <div className="Home">
             <h1>Documents</h1>
-            {
-                documents.map(function(doc, index){
-                    return <p>{doc.content}</p>;
-                })}
+            <table>
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Created</th>
+                        <th>Last updated</th>
+                        <th>Location</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {
+                    documents.map(function(doc, index){
+                        return (<tr>
+                            <td>{doc.name}</td>
+                            <td>{new Date(doc.created).toLocaleString()}</td>
+                            <td>{new Date(doc.updated).toLocaleString()}</td>
+                            <td>{doc.updated}</td>
+                            </tr>);
+                    })}
+                </tbody>
+            </table>
+
 
         </div>
     );
