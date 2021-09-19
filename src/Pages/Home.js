@@ -1,7 +1,8 @@
 import React, { useEffect, useMemo, useState } from 'react';
 import axios from 'axios';
 import moment from 'moment';
-import { Link, useParams } from 'react-router-dom';
+import { Link } from 'react-router-dom';
+import DateUtils from '../utils/DateUtils';
 
 function Home () {
     const [myEditor, setMyEditor] = useState(null);
@@ -36,7 +37,7 @@ function Home () {
                             <tr>
                                 <td><Link to={"/editor/" + doc._id}>{doc.name}</Link></td>
                                 <td>{new Date(doc.created).toLocaleString()}</td>
-                                <td>{moment(doc.updated).fromNow()}</td>
+                                <td>{DateUtils.relativeSinceDate(doc.updated)}</td>
                                 <td>{new Date(doc.updated).toLocaleString()}</td>
                             </tr>);
                     })}

@@ -9,6 +9,7 @@ function Editor () {
     const { id } = useParams();
     const [myEditor, setMyEditor] = useState(null);
     const [document, setDocument] = useState(null);
+    const [isLoading, setIsLoading] = useState(false);
 
     useEffect(() => {
             axios.post('/find', {"id": id})
