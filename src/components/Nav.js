@@ -45,4 +45,3 @@ function Nav (data) {
 }
 
 export default Nav;
-

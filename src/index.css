@@ -179,3 +179,42 @@ input[type="text"].input:focus {
   border-bottom: 0.1rem solid #e1e1e1;
   padding: 1.2rem 1.5rem;
 }
+
+.fullscreen-loading {
+  z-index: 3;
+  width: 95vw;
+  height: 100vh;
+  overflow: hidden;
+  background-color: white;
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.fullscreen-loading .loader {
+  border: 1em solid #f3f3f3;
+  border-top: 1em solid var(--bg-seconary);
+  width: 20em;
+  height: 20em;
+}
+
+.loader {
+  border: 5px solid #f3f3f3;
+  border-top: 5px solid var(--bg-seconary);
+  border-radius: 50%;
+  width: 1em;
+  height: 1em;
+  -webkit-animation: spin 2s linear infinite;
+  position: relative;
+}
+
+@-webkit-keyframes spin {
+  0% { -webkit-transform: rotate(0deg);}
+  100% { -webkit-transform: rotate(360deg);}
+}
+
+@keyframes spin {
+  0% { -webkit-transform: rotate(0deg);}
+  100% { -webkit-transform: rotate(360deg);}
+}
