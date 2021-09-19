@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
+import moment from 'moment';
+import { Link } from 'react-router-dom';
 
 function Home () {
     const [myEditor, setMyEditor] = useState(null);
@@ -9,7 +11,7 @@ function Home () {
 
     useEffect(() => {
         // axios.post('https://localhost:1337/findall').then((data) => console.log(data));
-        axios.post('http://localhost:1337/findall')
+        axios.post('/findall')
         .then(response => setDocuments(response.data));
     }, [])
     
@@ -30,11 +32,12 @@ function Home () {
                 <tbody>
                     {
                     documents.map(function(doc, index){
-                        return (<tr>
-                            <td>{doc.name}</td>
-                            <td>{new Date(doc.created).toLocaleString()}</td>
-                            <td>{new Date(doc.updated).toLocaleString()}</td>
-                            <td>{doc.updated}</td>
+                        return (
+                            <tr>
+                                <td><Link to="/editor">{doc.name}</Link></td>
+                                <td>{new Date(doc.created).toLocaleString()}</td>
+                                <td>{moment(doc.updated).fromNow()}</td>
+                                <td>{new Date(doc.updated).toLocaleString()}</td>
                             </tr>);
                     })}
                 </tbody>
