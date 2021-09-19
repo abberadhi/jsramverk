@@ -34,7 +34,7 @@ function Home () {
                     documents.map(function(doc, index){
                         return (
                             <tr>
-                                <td><Link to="/editor">{doc.name}</Link></td>
+                                <td><Link to={"/editor/" + doc._id}>{doc.name}</Link></td>
                                 <td>{new Date(doc.created).toLocaleString()}</td>
                                 <td>{moment(doc.updated).fromNow()}</td>
                                 <td>{new Date(doc.updated).toLocaleString()}</td>
