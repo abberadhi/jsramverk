@@ -12,10 +12,8 @@ function Create () {
     }, [])
 
     return (
-        <div className="Create">
-            <div className="fullscreen-loading">
-                    <Loader></Loader> 
-            </div>
+        <div className="Create fullscreen-loading">
+                <Loader></Loader> 
         </div>
     );
 }

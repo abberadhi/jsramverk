@@ -1,8 +1,9 @@
-import React, { useEffect, useMemo, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import moment from 'moment';
 import { Link } from 'react-router-dom';
 import DateUtils from '../utils/DateUtils';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faTrash } from '@fortawesome/free-solid-svg-icons'
 
 function Home () {
     const [myEditor, setMyEditor] = useState(null);
@@ -27,7 +28,7 @@ function Home () {
                         <th>Name</th>
                         <th>Created</th>
                         <th>Last updated</th>
-                        <th>Location</th>
+                        <th>Delete</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -38,7 +39,10 @@ function Home () {
                                 <td><Link to={"/editor/" + doc._id}>{doc.name}</Link></td>
                                 <td>{new Date(doc.created).toLocaleString()}</td>
                                 <td>{DateUtils.relativeSinceDate(doc.updated)}</td>
-                                <td>{new Date(doc.updated).toLocaleString()}</td>
+                                <td><FontAwesomeIcon onClick={() => {
+                                    axios.post('/delete', {"id": doc._id});
+                                    setDocuments(documents.slice(0, index).concat(documents.slice(index + 1)));
+                                }} className="deleteBtn" size="lg" icon={faTrash} /></td>
                             </tr>);
                     })}
                 </tbody>

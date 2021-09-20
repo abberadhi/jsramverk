@@ -166,8 +166,7 @@ input[type="text"].input:focus {
 .Home table {
   display: table;
   overflow-x: initial;
-  margin-bottom: 4rem;
-  margin-top: 4rem;
+  margin: 4em auto; 
   position: relative;
 }
 
@@ -190,6 +189,7 @@ input[type="text"].input:focus {
   display: flex;
   justify-content: center;
   align-items: center;
+  margin-left: 5em;
 }
 
 .fullscreen-loading .loader {
@@ -197,6 +197,7 @@ input[type="text"].input:focus {
   border-top: 1em solid var(--bg-seconary);
   width: 20em;
   height: 20em;
+  
 }
 
 .loader {
@@ -218,4 +219,10 @@ input[type="text"].input:focus {
 @keyframes spin {
   0% { -webkit-transform: rotate(0deg);}
   100% { -webkit-transform: rotate(360deg);}
+}
+
+.deleteBtn {
+  color: red;
+  font-size: 2em;
+  cursor: pointer;
 }
