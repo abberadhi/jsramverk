@@ -3,6 +3,7 @@ import { Redirect } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPlus, faList } from '@fortawesome/free-solid-svg-icons'
 import { Link } from 'react-router-dom';
+import url from '../utils/url';
 
 function Nav (data) {
     return (
@@ -11,7 +12,7 @@ function Nav (data) {
 
                 <ul className="navbar-nav">
                     <li className="nav-item add">
-                        <Link to="/create">
+                        <Link to={url("/create")}>
                             <div className="nav-link">
                                 <FontAwesomeIcon size="lg" icon={faPlus} />
                             </div>
@@ -19,7 +20,7 @@ function Nav (data) {
 
                     </li>
                     <li className="nav-item">
-                        <Link to="/">
+                        <Link to={url("/")}>
                             <div className="nav-link">
                                 <FontAwesomeIcon size="lg" icon={faList} />
                             </div>

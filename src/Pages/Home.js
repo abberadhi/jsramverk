@@ -5,6 +5,7 @@ import DateUtils from '../utils/DateUtils';
 import Loader from '../components/Loader';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTrash, faFile } from '@fortawesome/free-solid-svg-icons'
+import url from '../utils/url';
 
 function Home () {
     const [myEditor, setMyEditor] = useState(null);
@@ -43,7 +44,7 @@ function Home () {
                     documents.map(function(doc, index){
                         return (
                             <tr>
-                                <td><Link to={"/editor/" + doc._id}><FontAwesomeIcon size="lg" icon={faFile}></FontAwesomeIcon>  {doc.name}</Link></td>
+                                <td><Link to={url("/editor/" + doc._id)}><FontAwesomeIcon size="lg" icon={faFile}></FontAwesomeIcon>  {doc.name}</Link></td>
                                 <td>{new Date(doc.created).toLocaleString()}</td>
                                 <td>{DateUtils.relativeSinceDate(doc.updated)}</td>
                                 <td><FontAwesomeIcon onClick={() => {
