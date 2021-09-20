@@ -16,7 +16,7 @@ class autoSaveTimer {
         this.timeoutId = setTimeout( ()  => {
           callback();
           setIsSaving(false);
-        }, 2000);
+        }, 1000);
       }
 }
 

@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 import DateUtils from '../utils/DateUtils';
+import Loader from '../components/Loader';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTrash, faFile } from '@fortawesome/free-solid-svg-icons'
 
@@ -10,11 +11,12 @@ function Home () {
                 // onClick={ () => console.log(myEditor.getData())}
 
     const [documents, setDocuments] = useState([]);
+    const [isLoading, setIsLoading] = useState(true);
 
     useEffect(() => {
         // axios.post('https://localhost:1337/findall').then((data) => console.log(data));
         axios.post('/findall')
-        .then(response => {setDocuments(response.data); console.log(response)});
+        .then(response => {setDocuments(response.data); setIsLoading(false)});
     }, [])
     
         
@@ -22,7 +24,12 @@ function Home () {
     return (
         <div className="Home">
             <h1>Documents</h1>
-            <table>
+            {isLoading ? (
+                        <div className="table-load">
+                            <Loader></Loader>
+                        </div>
+            ) :
+(            <table>
                 <thead>
                     <tr>
                         <th>Name</th>
@@ -46,7 +53,7 @@ function Home () {
                             </tr>);
                     })}
                 </tbody>
-            </table>
+            </table>)}
 
 
         </div>
@@ -54,4 +61,3 @@ function Home () {
 }
 
 export default Home;
-

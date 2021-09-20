@@ -211,6 +211,20 @@ input[type="text"].input:focus {
   display: inline-block;
 }
 
+.table-load {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.table-load .loader {
+  width: 20em;
+  height: 20em;
+  border: 1em solid #f3f3f3;
+  border-top: 1em solid var(--bg-seconary);
+}
+
 @-webkit-keyframes spin {
   0% { -webkit-transform: rotate(0deg);}
   100% { -webkit-transform: rotate(360deg);}
