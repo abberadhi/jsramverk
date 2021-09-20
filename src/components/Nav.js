@@ -1,6 +1,7 @@
 import React from 'react';
+import { Redirect } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faPlus, faFileWord, faList } from '@fortawesome/free-solid-svg-icons'
+import { faPlus, faList } from '@fortawesome/free-solid-svg-icons'
 import { Link } from 'react-router-dom';
 
 function Nav (data) {
@@ -9,21 +10,19 @@ function Nav (data) {
             <nav className="navbar">
 
                 <ul className="navbar-nav">
-                    <li
-                    onClick={ () => {
-                        console.log(data.myEditor.getData());
-                    }} 
-                    className="nav-item add"
-                    >
-                        <div className="nav-link">
-                            <FontAwesomeIcon size="lg" icon={faPlus} />
-                        </div>
+                    <li className="nav-item add">
+                        <Link to="/create">
+                            <div className="nav-link">
+                                <FontAwesomeIcon size="lg" icon={faPlus} />
+                            </div>
+                        </Link>
+
                     </li>
                     <li className="nav-item">
                         <Link to="/">
-                        <div className="nav-link">
-                            <FontAwesomeIcon size="lg" icon={faList} />
-                        </div>
+                            <div className="nav-link">
+                                <FontAwesomeIcon size="lg" icon={faList} />
+                            </div>
                         </Link>
                     </li>
                 </ul>

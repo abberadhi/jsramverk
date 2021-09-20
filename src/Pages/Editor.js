@@ -36,7 +36,7 @@ function Editor () {
                 setDocument(response.data);
                 setInitialDocument(response.data);
             });
-            setTimeoutSave(new autoSaveTimer);
+            setTimeoutSave(new autoSaveTimer());
     }, []);
 
     useEffect(() => {
