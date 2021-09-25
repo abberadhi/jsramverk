@@ -61,7 +61,7 @@ function Editor () {
     }
 
     return (
-        <div className="Editor">
+        <div className="Editor" data-testid="test-editor">
             {isLoading ?
                 (<div className="fullscreen-loading">
                     <Loader></Loader> 
@@ -77,6 +77,7 @@ function Editor () {
             ></Overlay> : null}
 
             <CKEditor
+                data-testid="theEditor"
                 editor={ ClassicEditor }
                 onReady={ editor => {
                     setMyEditor(editor);

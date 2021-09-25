@@ -7,9 +7,9 @@ import url from '../utils/url';
 function Create () {
     let history = useHistory();
     useEffect(() => {
-        // axios.post('https://localhost:1337/findall').then((data) => console.log(data));
         axios.post('/update', {name: "Untitled", content:""})
-        .then(response => history.push(url("/editor/" + response.data.insertedId)));
+        .then(response => {history.push(url("/editor/" + response.data.insertedId));})
+        .catch(error => console.log("Something went wrong: ", error));
     }, [])
 
     return (

@@ -9,13 +9,10 @@ import url from '../utils/url';
 
 function Home () {
     const [myEditor, setMyEditor] = useState(null);
-                // onClick={ () => console.log(myEditor.getData())}
-
     const [documents, setDocuments] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
 
     useEffect(() => {
-        // axios.post('https://localhost:1337/findall').then((data) => console.log(data));
         axios.post('/findall')
         .then(response => {setDocuments(response.data); setIsLoading(false)});
     }, [])
@@ -39,11 +36,12 @@ function Home () {
                         <th>Delete</th>
                     </tr>
                 </thead>
-                <tbody>
+                <tbody data-testid="documents-table">
+                    {documents.length == 0 ? <tr><td>Can't find any documents</td></tr> : <tr><td>Here is what we found:</td></tr> }
                     {
                     documents.map(function(doc, index){
                         return (
-                            <tr>
+                            <tr key={doc._id}>
                                 <td><Link to={url("/editor/" + doc._id)}><FontAwesomeIcon size="lg" icon={faFile}></FontAwesomeIcon>  {doc.name}</Link></td>
                                 <td>{new Date(doc.created).toLocaleString()}</td>
                                 <td>{DateUtils.relativeSinceDate(doc.updated)}</td>
@@ -53,6 +51,7 @@ function Home () {
                                 }} className="deleteBtn" size="lg" icon={faTrash} /></td>
                             </tr>);
                     })}
+                    
                 </tbody>
             </table>)}
 

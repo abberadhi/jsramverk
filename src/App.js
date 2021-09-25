@@ -5,8 +5,14 @@ import Editor from './Pages/Editor';
 import Home from './Pages/Home';
 import Create from './Pages/Create';
 import url from './utils/url';
+import axios from 'axios';
+
+
 
 function App () {
+
+    axios.defaults.baseURL = 'https://jsramverk-editor-abra19.azurewebsites.net';
+
     return (
         <Router>
             <Nav 
