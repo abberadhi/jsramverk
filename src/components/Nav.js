@@ -11,9 +11,9 @@ function Nav (data) {
             <nav className="navbar">
 
                 <ul className="navbar-nav">
-                    <li className="nav-item add">
+                    <li className="nav-item add" >
                         <Link to={url("/create")}>
-                            <div className="nav-link">
+                            <div className="nav-link" data-testid="add-link">
                                 <FontAwesomeIcon size="lg" icon={faPlus} />
                             </div>
                         </Link>
@@ -21,7 +21,7 @@ function Nav (data) {
                     </li>
                     <li className="nav-item">
                         <Link to={url("/")}>
-                            <div className="nav-link">
+                            <div className="nav-link" data-testid="docs-link">
                                 <FontAwesomeIcon size="lg" icon={faList} />
                             </div>
                         </Link>
