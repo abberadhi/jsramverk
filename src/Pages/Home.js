@@ -7,6 +7,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTrash, faFile } from '@fortawesome/free-solid-svg-icons'
 import url from '../utils/url';
 
+
 function Home () {
     const [myEditor, setMyEditor] = useState(null);
     const [documents, setDocuments] = useState([]);

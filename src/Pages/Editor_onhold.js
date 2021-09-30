@@ -9,8 +9,7 @@ import axios from 'axios';
 import socketIOClient from "socket.io-client";
 // import { emit } from '../../../editorAPI/src/app';
 
-// const ENDPOINT = "http://127.0.0.1:1337";
-const ENDPOINT = "https://jsramverk-editor-abra19.azurewebsites.net";
+const ENDPOINT = "http://127.0.0.1:1337";
 
 const socket = socketIOClient(ENDPOINT);
 
@@ -24,6 +23,11 @@ function Editor () {
 
     // stores new document everytime it changes. Used to send post req
     const [document, setDocument] = useState(null);
+
+    const [name, setName] = useState(null);
+    const [content, setContent] = useState(null);
+    const [updated, setUpdated] = useState(null);
+    const [created, setCreated] = useState(null);
 
     // bool value for when loading animation for the entire page
     const [isLoading, setIsLoading] = useState(true);
@@ -43,7 +47,12 @@ function Editor () {
     useEffect(() => {
             axios.post('/find', {"id": id})
             .then(response => {
-                setDocument(response.data);
+                
+                setName(response.data.name);
+                setContent(response.data.content);
+                setUpdated(response.data.updated);
+                setCreated(response.data.created);
+
                 setInitialDocument(response.data);
             });
             setTimeoutSave(new autoSaveTimer());
@@ -53,41 +62,53 @@ function Editor () {
         if(initialDocument && myEditor) {
             setIsSyncing(true);
 
-            myEditor.setData(document.content)
-            socket.emit('create', document._id);
+            myEditor.setData(content);
+            // socket.emit('create', initialDocument._id);
 
-            socket.on('doc', function(data) {
-                setIsSyncing(true);
+            // socket.on('doc', function(data) {
+            //     // setIsSyncing(true);
+            //     console.log("doc before", document);
                 
-                const temp = {
-                    updated: new Date(),
-                    content: data.content,
-                    name: data.name,
-                }
-                setDocument({...document, ...temp});
+            //     // setDocument({...document, ...temp});
 
-                myEditor.setData(data.content);
-                setIsSyncing(false);
-            });
+            //     setName(data.name);
+            //     setContent(data.content);
+            //     setUpdated(new Date());
+            //     setCreated(data.created);
+
+            //     myEditor.setData(data.content);
+
+            //     setIsSyncing(false);
+            // });
+
+            console.log("youre fucked")
 
             setIsLoading(false);
             setInitiated(true);
             setIsSyncing(false);
         }
+
+        return () => socket.disconnect();
     }, [initialDocument, myEditor]);
 
+    useEffect(() => console)
+
     function saveDocument(text) {
-        document.content = myEditor.getData();
-        socket.emit('sync', {id: document._id, name: text ?? document.name, content: document.content});
+
+        setName(text ?? name);
+        setContent(myEditor.getData());
+        setUpdated(new Date());
+
+        // socket.emit('sync', {id: initialDocument._id, name: text ?? name, content: content});
+        
         timeoutSave.save(() => {
-            const temp = {
-                updated: new Date(),
-                content: myEditor.getData(),
-                name: text ?? document.name,
-                id: document._id,
-            }
-            setDocument({...document, ...temp});
-            axios.post('/update', {...document, ...temp});
+            axios.post('/update', {
+                id: initialDocument._id,
+                name,
+                content,
+                updated,
+                created
+            });
         }, setIsSaving);
     }
 
@@ -98,12 +119,13 @@ function Editor () {
                     <Loader></Loader> 
                 </div>): null
             }
-            {document ? 
+            {initialDocument ? 
             <Overlay
-                name={document.name}
-                created={document.created}
-                updated={document.updated}
+                name={name}
+                created={created}
+                updated={updated}
                 isSaving={isSaving}
+                setName={setName}
                 saveDocument={saveDocument}
             ></Overlay> : null}
 
