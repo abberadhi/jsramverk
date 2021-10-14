@@ -13,12 +13,22 @@ function Home () {
     const [documents, setDocuments] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
 
+    // useEffect(() => {
+    //     axios.post('/findall')
+    //     .then(response => {setDocuments(response.data); setIsLoading(false)});
+    // }, [])
+
     useEffect(() => {
-        axios.post('/findall')
-        .then(response => {setDocuments(response.data); setIsLoading(false)});
+        axios.post(
+            '/graphql', 
+            JSON.stringify({ query: "{ getAllDocuments { id, name, content, updated, created }}"}),
+            {headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json',
+            }},
+        )
+        .then(response => {setDocuments(response.data.data.getAllDocuments); setIsLoading(false)});
     }, [])
-    
-        
 
     return (
         <div className="Home">
@@ -44,15 +54,14 @@ function Home () {
                         return (
                             <tr key={doc._id}>
                                 <td><Link to={url("/editor/" + doc._id)}><FontAwesomeIcon size="lg" icon={faFile}></FontAwesomeIcon>  {doc.name}</Link></td>
-                                <td>{new Date(doc.created).toLocaleString()}</td>
-                                <td>{DateUtils.relativeSinceDate(doc.updated)}</td>
+                                <td>{new Date(parseInt(doc.created)).toLocaleString()}</td>
+                                <td>{DateUtils.relativeSinceDate(parseInt(doc.updated))}</td>
                                 <td><FontAwesomeIcon onClick={() => {
                                     axios.post('/delete', {"id": doc._id});
                                     setDocuments(documents.slice(0, index).concat(documents.slice(index + 1)));
                                 }} className="deleteBtn" size="lg" icon={faTrash} /></td>
                             </tr>);
                     })}
-                    
                 </tbody>
             </table>)}
 

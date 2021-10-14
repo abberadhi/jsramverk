@@ -9,8 +9,8 @@ import axios from 'axios';
 import socketIOClient from "socket.io-client";
 // import { emit } from '../../../editorAPI/src/app';
 
-// const ENDPOINT = "http://127.0.0.1:1337";
-const ENDPOINT = "https://jsramverk-editor-abra19.azurewebsites.net";
+const ENDPOINT = "http://127.0.0.1:1337";
+// const ENDPOINT = "https://jsramverk-editor-abra19.azurewebsites.net";
 
 const socket = socketIOClient(ENDPOINT);
 
