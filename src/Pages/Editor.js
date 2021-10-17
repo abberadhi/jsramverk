@@ -41,20 +41,30 @@ function Editor () {
     const [isSyncing, setIsSyncing] = useState(false);
 
     useEffect(() => {
-            axios.post('/find', {"id": id})
-            .then(response => {
-                setDocument(response.data);
-                setInitialDocument(response.data);
-            });
-            setTimeoutSave(new autoSaveTimer());
+        axios.post(
+            '/graphql', 
+            JSON.stringify({ query: `{ getDocumentById(id: "${id}") { id, name, content, updated, created }}`}),
+            {headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json',
+            }},
+        )
+        .then(response => {
+            console.log(response.data.data.getDocumentById)
+            setDocument(response.data.data.getDocumentById);
+            setInitialDocument(response.data.data.getDocumentById);
+        });
+
+        setTimeoutSave(new autoSaveTimer());
     }, []);
 
     useEffect(() => {
+
         if(initialDocument && myEditor) {
             setIsSyncing(true);
 
             myEditor.setData(document.content)
-            socket.emit('create', document._id);
+            socket.emit('create', document.id);
 
             socket.on('doc', function(data) {
                 setIsSyncing(true);
@@ -78,16 +88,43 @@ function Editor () {
 
     function saveDocument(text) {
         document.content = myEditor.getData();
-        socket.emit('sync', {id: document._id, name: text ?? document.name, content: document.content});
+        socket.emit('sync', {id: document.id, name: text ?? document.name, content: document.content});
         timeoutSave.save(() => {
             const temp = {
-                updated: new Date(),
+                updated: Date.now(),
                 content: myEditor.getData(),
                 name: text ?? document.name,
-                id: document._id,
+                id: document.id,
             }
             setDocument({...document, ...temp});
-            axios.post('/update', {...document, ...temp});
+            // axios.post('/update', {...document, ...temp});
+
+            axios({
+                url: "/graphql",
+                method: "post",
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json',
+                },
+                data: {
+                    query: `mutation { editDocument(id: "${temp.id}", content: "${temp.content}", name: "${temp.name}") { id, name, content, updated, created }}`}
+            }).then(response => {
+                console.log(response)
+            });
+    
+
+            // axios.post(
+            //     '/graphql', 
+            //     JSON.stringify({ mutation: `{ editDocument(id: "${document.id}", content: "${temp.content}", name: "${temp.name}") { id, name, content, updated, created } }` }),
+            //     {headers: {
+            //         'Content-Type': 'application/json',
+            //         'Accept': 'application/json',
+            //     }},
+            // )
+            // .then(response => {
+            //     console.log(response)
+            // })
+
         }, setIsSaving);
     }
 

@@ -16,10 +16,10 @@ function Overlay (data) {
                 }
 
                 defaultValue={data.name ?? "Untitled"} type="text" className="input"></input>
-                <p className="created">Created: {data.created ?? "Untitled"}</p>
+                <p className="created">Created: {DateUtils.relativeSinceDate(parseInt(data.created)) ?? "Untitled"}</p>
             </div>
 
-            <p className="edited">Last updated: {data.isSaving ? <Loader></Loader> : (DateUtils.relativeSinceDate(data.updated) ?? "Untitled")}</p>
+            <p className="edited">Last updated: {data.isSaving ? <Loader></Loader> : (DateUtils.relativeSinceDate(parseInt(data.updated)) ?? "Untitled")}</p>
         </div>
     );
 }

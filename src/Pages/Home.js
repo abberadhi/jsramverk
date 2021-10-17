@@ -19,15 +19,18 @@ function Home () {
     // }, [])
 
     useEffect(() => {
+
         axios.post(
             '/graphql', 
-            JSON.stringify({ query: "{ getAllDocuments { id, name, content, updated, created }}"}),
+            JSON.stringify({ query: "{ getAllDocuments { id, name, updated, created }}"}),
             {headers: {
                 'Content-Type': 'application/json',
                 'Accept': 'application/json',
             }},
         )
-        .then(response => {setDocuments(response.data.data.getAllDocuments); setIsLoading(false)});
+        .then(response => {
+            setDocuments(response.data.data.getAllDocuments);
+            setIsLoading(false)});
     }, [])
 
     return (
@@ -52,12 +55,33 @@ function Home () {
                     {
                     documents.map(function(doc, index){
                         return (
-                            <tr key={doc._id}>
-                                <td><Link to={url("/editor/" + doc._id)}><FontAwesomeIcon size="lg" icon={faFile}></FontAwesomeIcon>  {doc.name}</Link></td>
+                            <tr key={doc.id}>
+                                <td><Link to={url("/editor/" + doc.id)}><FontAwesomeIcon size="lg" icon={faFile}></FontAwesomeIcon>  {doc.name}</Link></td>
                                 <td>{new Date(parseInt(doc.created)).toLocaleString()}</td>
                                 <td>{DateUtils.relativeSinceDate(parseInt(doc.updated))}</td>
                                 <td><FontAwesomeIcon onClick={() => {
-                                    axios.post('/delete', {"id": doc._id});
+
+
+
+
+
+                                    axios.post('/delete', {"id": doc.id});
+
+
+                                    axios({
+                                        url: "/graphql",
+                                        method: "post",
+                                        headers: {
+                                            'Content-Type': 'application/json',
+                                            'Accept': 'application/json',
+                                        },
+                                        data: {
+                                            query: `mutation { deleteDocument(id: "${doc.id}") { id, name, content, updated, created }}`}
+                                    }).then(response => {
+                                        console.log(response)
+                                    });
+
+
                                     setDocuments(documents.slice(0, index).concat(documents.slice(index + 1)));
                                 }} className="deleteBtn" size="lg" icon={faTrash} /></td>
                             </tr>);
