@@ -7,9 +7,25 @@ import url from '../utils/url';
 function Create () {
     let history = useHistory();
     useEffect(() => {
-        axios.post('/update', {name: "Untitled", content:""})
-        .then(response => {history.push(url("/editor/" + response.data.insertedId));})
-        .catch(error => console.log("Something went wrong: ", error));
+
+
+        axios({
+            url: "/graphql",
+            method: "post",
+            headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json',
+            },
+            data: {
+                query: `mutation { editDocument(content: "", name: "Untitled") { id, name, content, updated, created }}`}
+        }).then(response => {
+            console.log(response)
+            history.push(url("/editor/" + response.data.data.editDocument.id));
+        });
+
+        // axios.post('/update', {name: "Untitled", content:""})
+        // .then(response => {history.push(url("/editor/" + response.data.insertedId));})
+        // .catch(error => console.log("Something went wrong: ", error));
     }, [])
 
     return (
