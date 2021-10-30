@@ -64,10 +64,6 @@ function Home () {
 
 
 
-
-                                    axios.post('/delete', {"id": doc.id});
-
-
                                     axios({
                                         url: "/graphql",
                                         method: "post",

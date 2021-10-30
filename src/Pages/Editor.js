@@ -111,19 +111,6 @@ function Editor () {
             }).then(response => {
                 console.log(response)
             });
-    
-
-            // axios.post(
-            //     '/graphql', 
-            //     JSON.stringify({ mutation: `{ editDocument(id: "${document.id}", content: "${temp.content}", name: "${temp.name}") { id, name, content, updated, created } }` }),
-            //     {headers: {
-            //         'Content-Type': 'application/json',
-            //         'Accept': 'application/json',
-            //     }},
-            // )
-            // .then(response => {
-            //     console.log(response)
-            // })
 
         }, setIsSaving);
     }

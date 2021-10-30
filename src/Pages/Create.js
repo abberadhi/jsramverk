@@ -19,7 +19,7 @@ function Create () {
             data: {
                 query: `mutation { editDocument(content: "", name: "Untitled") { id, name, content, updated, created }}`}
         }).then(response => {
-            console.log(response)
+            console.log("response", response)
             history.push(url("/editor/" + response.data.data.editDocument.id));
         });
 
