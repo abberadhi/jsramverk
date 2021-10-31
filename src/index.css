@@ -306,6 +306,11 @@ input[type="text"].input:focus {
   border-radius: 5px;
 }
 
+.signin .loader {
+  height: 15em;
+  width: 15em;
+}
+
 
 /* Change styles for span and cancel button on extra small screens */
 @media screen and (max-width: 300px) {
