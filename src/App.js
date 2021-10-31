@@ -11,15 +11,13 @@ import auth from './utils/auth';
 import axios from 'axios';
 
 
-
 function App () {
     // axios.defaults.baseURL = 'https://jsramverk-editor-abra19.azurewebsites.net';
     axios.defaults.baseURL = 'http://localhost:1337';
 
     return (
         <Router>
-            {auth.isAuthenticated() ? <Nav 
-            ></Nav> : null}
+            <Nav></Nav>
             
             <Route path={url("/signin")} exact component={SignIn}></Route> :  
             <ProtectedRoute path={url("/")} exact component={Home}></ProtectedRoute>
