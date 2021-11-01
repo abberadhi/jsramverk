@@ -31,9 +31,9 @@ function SignIn (props) {
                 'Accept': 'application/json',
             },
             data: {
-                query: `mutation { userLogin(email: "${email}", password: "${password}") {  id, email, token, msg }}`}
+                query: `mutation { registerUser(email: "${email}", password: "${password}") {  id, email, token, msg }}`}
         }).then((response => {
-            let res = response.data.data.userLogin;
+            let res = response.data.data.registerUser;
             setLoading(false);
 
             if (res.msg) { 
@@ -62,7 +62,7 @@ function SignIn (props) {
 
     return (
         <div className="signin">
-            <h1>Sign in</h1>
+            <h1>Register</h1>
             { JSON.stringify(user, null, 2) }
             {!loading ? (<div>
                 {errMsg ? <div className="errMsg"><h4>Error</h4>
@@ -81,8 +81,7 @@ function SignIn (props) {
                         <button type="submit" disabled={!validateForm()}>Login</button>
                     </div>
                     <div class="container">
-                    
-                        <span class="psw">Not registered?  <Link to={url("/register")}>Click here</Link></span>
+                        <span class="psw">Already have an account? <Link to={url("/signin")}>Click here</Link></span>
                     </div>
                 </form>            
             </div>) : <Loader></Loader>}

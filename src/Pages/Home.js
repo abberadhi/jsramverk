@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 import DateUtils from '../utils/DateUtils';
@@ -6,12 +6,15 @@ import Loader from '../components/Loader';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTrash, faFile } from '@fortawesome/free-solid-svg-icons'
 import url from '../utils/url';
+import { UserContext } from '../utils/UserContext';
 
 
 function Home () {
     const [myEditor, setMyEditor] = useState(null);
     const [documents, setDocuments] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
+
+    const { user, setUser } = useContext(UserContext);
 
     // useEffect(() => {
     //     axios.post('/findall')
@@ -26,6 +29,7 @@ function Home () {
             {headers: {
                 'Content-Type': 'application/json',
                 'Accept': 'application/json',
+                'Authorization': `Bearer ${user.token}`
             }},
         )
         .then(response => {
@@ -70,6 +74,7 @@ function Home () {
                                         headers: {
                                             'Content-Type': 'application/json',
                                             'Accept': 'application/json',
+                                            'Authorization': `Bearer ${user.token}`
                                         },
                                         data: {
                                             query: `mutation { deleteDocument(id: "${doc.id}") { id, name, content, updated, created }}`}

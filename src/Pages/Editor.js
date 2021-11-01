@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { useParams } from "react-router-dom";
 import Overlay from '../components/Overlay';
 import Loader from '../components/Loader';
@@ -7,6 +7,7 @@ import { CKEditor } from '@ckeditor/ckeditor5-react';
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import axios from 'axios';
 import socketIOClient from "socket.io-client";
+import { UserContext } from '../utils/UserContext';
 // import { emit } from '../../../editorAPI/src/app';
 
 const ENDPOINT = "http://127.0.0.1:1337";
@@ -40,6 +41,8 @@ function Editor () {
     // state for when an syncing is occuring - to avoid false onchange events
     const [isSyncing, setIsSyncing] = useState(false);
 
+    const { user, setUser } = useContext(UserContext);
+
     useEffect(() => {
         axios.post(
             '/graphql', 
@@ -47,6 +50,7 @@ function Editor () {
             {headers: {
                 'Content-Type': 'application/json',
                 'Accept': 'application/json',
+                'Authorization': `Bearer ${user.token}`
             }},
         )
         .then(response => {
@@ -105,6 +109,7 @@ function Editor () {
                 headers: {
                     'Content-Type': 'application/json',
                     'Accept': 'application/json',
+                    'Authorization': `Bearer ${user.token}`
                 },
                 data: {
                     query: `mutation { editDocument(id: "${temp.id}", content: "${temp.content}", name: "${temp.name}") { id, name, content, updated, created }}`}

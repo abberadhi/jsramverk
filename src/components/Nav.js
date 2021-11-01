@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 import { Redirect } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faPlus, faList } from '@fortawesome/free-solid-svg-icons'
+import { faPlus, faList, faDoorOpen } from '@fortawesome/free-solid-svg-icons'
 import { Link } from 'react-router-dom';
 import url from '../utils/url';
 import auth from '../utils/auth';
@@ -13,7 +13,7 @@ function Nav (data) {
 
     return (
         <header>
-            <nav className="navbar">
+            {user ? <nav className="navbar">
 
                 <ul className="navbar-nav">
                     <li className="nav-item add" >
@@ -31,15 +31,13 @@ function Nav (data) {
                             </div>
                         </Link>
                     </li>
-                    {user ? <li className="nav-item">
-                        <Link to={url("/")}>
-                            <div className="nav-link" data-testid="docs-link">
-                                <FontAwesomeIcon size="lg" icon={faList} />
+                    <li className="nav-item">
+                            <div className="nav-link" onClick={() => setUser(null)} data-testid="docs-link">
+                                <FontAwesomeIcon size="lg" icon={faDoorOpen} />
                             </div>
-                        </Link>
-                    </li> : null}
+                    </li>
                 </ul>
-            </nav>    
+            </nav> : null}
         </header>    
     );
 }
