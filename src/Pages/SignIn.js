@@ -1,10 +1,11 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import axios from 'axios';
 import { Link, useHistory } from 'react-router-dom';
 import DateUtils from '../utils/DateUtils';
 import Loader from '../components/Loader';
 import url from '../utils/url';
 import auth from '../utils/auth';
+import { UserContext } from '../utils/UserContext';
 
 
 function SignIn (props) {
@@ -14,12 +15,45 @@ function SignIn (props) {
     const [errMsg, setErrMsg] = useState(null);
     const [loading, setLoading] = useState(false);
     
+    const { user, setUser } = useContext(UserContext)
     
     function handleSubmit(event) {
         event.preventDefault();
         setLoading(true);
         console.log("this1", this);
-        auth.login(email, password, setLoading, setErrMsg).then(() => history.push(url("/" )));
+
+
+        axios({
+            url: "/graphql",
+            method: "post",
+            headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json',
+            },
+            data: {
+                query: `mutation { userLogin(email: "${email}", password: "${password}") {  id, email, token, msg }}`}
+        }).then((response => {
+            let res = response.data.data.userLogin;
+            setLoading(false);
+
+            if (res.msg) { 
+                setErrMsg(res.msg);
+                return;
+            }
+
+            setUser({
+                id: res.id,
+                email: res.email,
+                token: res.token
+            });
+
+            history.push(url("/" ));
+
+        }))
+
+        
+
+        // auth.login(email, password, setLoading, setErrMsg).then(() => history.push(url("/" )));
     }
 
     function validateForm() {
@@ -29,7 +63,7 @@ function SignIn (props) {
     return (
         <div className="signin">
             <h1>Sign in</h1>
-
+            { JSON.stringify(user, null, 2) }
             {!loading ? (<div>
                 {errMsg ? <div className="errMsg"><h4>Error</h4>
                 <p>{errMsg}</p>
