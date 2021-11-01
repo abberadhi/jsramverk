@@ -19,9 +19,9 @@ function SignIn (props) {
     
     function handleSubmit(event) {
         event.preventDefault();
+
         setLoading(true);
         console.log("this1", this);
-
 
         axios({
             url: "/graphql",
@@ -49,7 +49,7 @@ function SignIn (props) {
 
             history.push(url("/" ));
 
-        }))
+        }));
 
         
 
@@ -63,7 +63,6 @@ function SignIn (props) {
     return (
         <div className="signin">
             <h1>Sign in</h1>
-            { JSON.stringify(user, null, 2) }
             {!loading ? (<div>
                 {errMsg ? <div className="errMsg"><h4>Error</h4>
                 <p>{errMsg}</p>

@@ -57,7 +57,7 @@ body::-webkit-scrollbar-thumb {
   margin-left: 5em;
 }
 
-.navbar {
+.navbar1 {
   width: 5rem;
   height: 100vh;
   top: 0;
@@ -65,7 +65,7 @@ body::-webkit-scrollbar-thumb {
   background-color: var(--bg-primary);
 }
 
-.navbar-nav {
+.navbar1-nav {
   list-style: none;
   padding: 0;
   margin: 0;
@@ -80,7 +80,7 @@ body::-webkit-scrollbar-thumb {
 }
 
 /* makes last element on the very bottom */
-.nav-item:nth-child(3) {
+.nav-item:last-child {
   margin-top: auto;
 }
 

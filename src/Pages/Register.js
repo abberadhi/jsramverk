@@ -62,7 +62,6 @@ function SignIn (props) {
     return (
         <div className="signin">
             <h1>Register</h1>
-            { JSON.stringify(user, null, 2) }
             {!loading ? (<div>
                 {errMsg ? <div className="errMsg"><h4>Error</h4>
                 <p>{errMsg}</p>

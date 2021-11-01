@@ -13,9 +13,9 @@ function Nav (data) {
 
     return (
         <header>
-            {user ? <nav className="navbar">
+            {user ? <nav className="navbar1">
 
-                <ul className="navbar-nav">
+                <ul className="navbar1-nav">
                     <li className="nav-item add" >
                         <Link to={url("/create")}>
                             <div className="nav-link" data-testid="add-link">
