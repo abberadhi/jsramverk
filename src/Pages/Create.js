@@ -1,11 +1,15 @@
-import React, { useEffect } from 'react';
+import React, { useContext, useEffect } from 'react';
 import axios from 'axios';
 import { useHistory } from 'react-router-dom';
 import Loader from '../components/Loader';
 import url from '../utils/url';
+import { UserContext } from '../utils/UserContext';
 
 function Create () {
     let history = useHistory();
+
+    const { user, setUser } = useContext(UserContext);
+
     useEffect(() => {
 
 
@@ -15,11 +19,11 @@ function Create () {
             headers: {
                 'Content-Type': 'application/json',
                 'Accept': 'application/json',
+                'Authorization': `Bearer ${user.token}`
             },
             data: {
                 query: `mutation { editDocument(content: "", name: "Untitled") { id, name, content, updated, created }}`}
         }).then(response => {
-            console.log("response", response)
             history.push(url("/editor/" + response.data.data.editDocument.id));
         });
 

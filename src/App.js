@@ -27,9 +27,9 @@ function App () {
             
             <UserContext.Provider value={value}>
                 <Nav></Nav>
+                <Route path={url("/signin")} exact component={SignIn}></Route>
 
-                <Route path={url("/signin")} exact component={SignIn}></Route> :  
-                <Route path={url("/register")} exact component={Register}></Route> :  
+                <Route path={url("/register")} exact component={Register}></Route>
                 <ProtectedRoute path={url("/")} exact component={Home}></ProtectedRoute>
                 <ProtectedRoute path={url("/editor/:id")} component={Editor}></ProtectedRoute>
                 <ProtectedRoute path={url("/create")} component={Create}></ProtectedRoute>

@@ -54,7 +54,6 @@ function Editor () {
             }},
         )
         .then(response => {
-            console.log(response.data.data.getDocumentById)
             setDocument(response.data.data.getDocumentById);
             setInitialDocument(response.data.data.getDocumentById);
         });
