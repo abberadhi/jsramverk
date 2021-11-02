@@ -13,6 +13,8 @@ function Home() {
     const [myEditor, setMyEditor] = useState(null);
     const [documents, setDocuments] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
+    const [currentDocId, setCurrentDocId] = useState(true);
+    const [flip, setFlip] = useState(true);
 
     const { user, setUser } = useContext(UserContext);
 
@@ -22,7 +24,10 @@ function Home() {
     // }, [])
 
     useEffect(() => {
+        loadDocs();
+    }, [])
 
+    function loadDocs() {
         axios.post(
             '/graphql',
             JSON.stringify({ query: "{ getAllDocuments { id, name, updated, created, creator }}" }),
@@ -38,7 +43,7 @@ function Home() {
                 setDocuments(response.data.data.getAllDocuments);
                 setIsLoading(false)
             });
-    }, [])
+    }
 
     function addGuest(e) {
         e.preventDefault();
@@ -46,8 +51,21 @@ function Home() {
         let email = e.target[0].value
 
 
+        axios({
+            url: "/graphql",
+            method: "post",
+            headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json',
+                'Authorization': `Bearer ${user.token}`
+            },
+            data: {
+                query: `mutation { addUser(id: "${currentDocId}", email: "${email}") { id }}`
+            }
+        }).then(response => {
+            console.log(response)
+        });
 
-        console.log(email)
 
         e.target[0].value = ""
     }
@@ -56,6 +74,10 @@ function Home() {
     return (
         <div className="Home">
             <h1>Documents</h1>
+            <button style={{"float": "right"}} type="button" class="btn btn-success" onClick={() => {
+                setIsLoading(true);
+                loadDocs();
+            }}>Refresh</button>
             {isLoading ? (
                 <div className="table-load">
                     <Loader></Loader>
@@ -84,7 +106,7 @@ function Home() {
                                         <td>
 
                                             <div className="dropdown show">
-                                                <a className="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                <a onClick={() => setCurrentDocId(doc.id)} className="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 
                                                 </a>
 
@@ -124,7 +146,7 @@ function Home() {
 
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title" id="shareModalLabel">Share this document</h5>
+                            <h5 class="modal-title" id="shareModalLabel">Share this document {currentDocId}</h5>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                             </button>

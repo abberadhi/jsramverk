@@ -21,7 +21,6 @@ function SignIn (props) {
         event.preventDefault();
 
         setLoading(true);
-        console.log("this1", this);
 
         axios({
             url: "/graphql",
