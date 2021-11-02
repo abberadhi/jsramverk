@@ -18,6 +18,11 @@
 body {
   color: black;
   background-color: #32383f;
+  background-image: url(/src/wave-haikei.svg);
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-position: bottom;
+
   margin: 0; 
   padding: 0;
 }

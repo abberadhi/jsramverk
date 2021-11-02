@@ -50,7 +50,6 @@ function Home() {
 
         let email = e.target[0].value
 
-
         axios({
             url: "/graphql",
             method: "post",
@@ -65,7 +64,6 @@ function Home() {
         }).then(response => {
             console.log(response)
         });
-
 
         e.target[0].value = ""
     }
