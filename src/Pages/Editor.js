@@ -2,6 +2,7 @@ import React, { useState, useEffect, useContext } from 'react';
 import { useParams } from "react-router-dom";
 import Overlay from '../components/Overlay';
 import Loader from '../components/Loader';
+import CommentSection from '../components/CommentSection';
 import autoSaveTimer from '../utils/autoSaveTimer';
 import { CKEditor } from '@ckeditor/ckeditor5-react';
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
@@ -47,7 +48,10 @@ function Editor () {
     // state for when an syncing is occuring - to avoid false onchange events
     const [isSyncing, setIsSyncing] = useState(false);
 
+    const [comments, setComments] = useState(false);
+
     const { user, setUser } = useContext(UserContext);
+
 
     useEffect(() => {
         axios.post(
@@ -75,6 +79,8 @@ function Editor () {
             myEditor.setData(document.content)
             socket.emit('create', document.id);
 
+            setComments(window.document.getElementsByTagName('comment'));
+
             socket.on('doc', function(data) {
                 setIsSyncing(true);
                 
@@ -97,6 +103,9 @@ function Editor () {
 
     function saveDocument(text) {
         document.content = myEditor.getData();
+
+        setComments(window.document.getElementsByTagName('comment'));
+
         socket.emit('sync', {id: document.id, name: text ?? document.name, content: document.content});
         timeoutSave.save(() => {
             const temp = {
@@ -159,6 +168,7 @@ function Editor () {
                     }
                 }}
             />
+            <CommentSection comments={comments}></CommentSection>
 
 
 

@@ -72,7 +72,7 @@ function Home() {
     return (
         <div className="Home">
             <h1>Documents</h1>
-            <button style={{"float": "right"}} type="button" class="btn btn-success" onClick={() => {
+            <button style={{"float": "right"}} type="button" className="btn btn-success" onClick={() => {
                 setIsLoading(true);
                 loadDocs();
             }}>Refresh</button>
@@ -139,30 +139,30 @@ function Home() {
                     </tbody>
                 </table>)}
 
-            <div class="modal fade" id="shareModal" tabIndex="-1" role="dialog" aria-labelledby="shareModalLabel" aria-hidden="true">
-                <div class="modal-dialog" role="document">
+            <div className="modal fade" id="shareModal" tabIndex="-1" role="dialog" aria-labelledby="shareModalLabel" aria-hidden="true">
+                <div className="modal-dialog" role="document">
 
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="shareModalLabel">Share this document {currentDocId}</h5>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <div className="modal-content">
+                        <div className="modal-header">
+                            <h5 className="modal-title" id="shareModalLabel">Share this document {currentDocId}</h5>
+                            <button type="button" className="close" data-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                             </button>
                         </div>
                         <form onSubmit={addGuest}>
-                            <div class="modal-body">
+                            <div className="modal-body">
                                 <label> Share this document with:<br></br>
                                     <input type="email" placeholder="john@doe.xyz"></input>
                                 </label>
                             </div>
 
 
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                <button type="submit" class="btn btn-primary">Add</button>
+                            <div className="modal-footer">
+                                <button type="button" className="btn btn-secondary" data-dismiss="modal">Close</button>
+                                <button type="submit" className="btn btn-primary">Add</button>
                             </div>
                         </form>
-                        <div class="modal-body">
+                        <div className="modal-body">
                             <hr></hr>
                             <h5>People invited to this document:</h5>
                             <p>No one</p>
