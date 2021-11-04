@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import { Redirect, Route } from 'react-router-dom';
-import auth from '../utils/auth';
+import url from '../utils/url';
 import { UserContext } from '../utils/UserContext';
 
 
@@ -13,7 +13,7 @@ function ProtectedRoute ({component: Component, ...rest}) {
           {...rest}
           render={(props) => user
             ? <Component {...props} />
-            : <Redirect to={{pathname: '/signin', state: {from: props.location}}} />}
+            : <Redirect to={{pathname: url('/signin'), state: {from: props.location}}} />}
         />)
 }
 

@@ -5,10 +5,16 @@ import Loader from '../components/Loader';
 import autoSaveTimer from '../utils/autoSaveTimer';
 import { CKEditor } from '@ckeditor/ckeditor5-react';
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
+
+
 import axios from 'axios';
 import socketIOClient from "socket.io-client";
 import { UserContext } from '../utils/UserContext';
 // import { emit } from '../../../editorAPI/src/app';
+
+// import Comment from '../comment';
+// import Comment from '@ckeditor/ckeditor5-basic-styles/src/comment';
+
 
 const ENDPOINT = "http://127.0.0.1:1337";
 // const ENDPOINT = "https://jsramverk-editor-abra19.azurewebsites.net";
@@ -27,7 +33,7 @@ function Editor () {
     const [document, setDocument] = useState(null);
 
     // bool value for when loading animation for the entire page
-    const [isLoading, setIsLoading] = useState(true);
+    const [isLoading, setIsLoading] = useState(false);
 
     // bool for when saving animation is triggered for last updated section
     const [isSaving, setIsSaving] = useState(false); 
@@ -138,6 +144,10 @@ function Editor () {
             <CKEditor
                 data-testid="theEditor"
                 editor={ ClassicEditor }
+                config={ {
+                    // plugins: [ Comment ],
+                    // toolbar: [ 'comment' ]
+                } }
                 onReady={ editor => {
                     setMyEditor(editor);
                 } }
@@ -149,6 +159,10 @@ function Editor () {
                     }
                 }}
             />
+
+
+
+
         </div>
     );
 }

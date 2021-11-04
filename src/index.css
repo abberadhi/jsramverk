@@ -1,5 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Signika&display=swap');
 
+
 :root {
   font-size: 16px;
   font-family: 'Signika', sans-serif;
@@ -20,6 +21,7 @@ body {
   background-color: #32383f;
   background-image: url(/src/wave-haikei.svg);
   background-repeat: no-repeat;
+  background-size: cover;
   background-attachment: fixed;
   background-position: bottom;
 
@@ -326,4 +328,8 @@ input[type="text"].input:focus {
   .signin .cancelbtn {
      width: 100%;
   }
+}
+
+comment {
+  background-color: yellow;
 }

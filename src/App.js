@@ -8,7 +8,6 @@ import SignIn from './Pages/SignIn';
 import Register from './Pages/Register';
 import ProtectedRoute from './components/ProtectedRoute';
 import url from './utils/url';
-import auth from './utils/auth';
 import axios from 'axios';
 import { UserContext } from './utils/UserContext';
 
@@ -22,9 +21,7 @@ function App () {
     axios.defaults.baseURL = 'http://localhost:1337';
 
     return (
-        <Router>
-            
-            
+        <Router>            
             <UserContext.Provider value={value}>
                 <Nav></Nav>
                 <Route path={url("/signin")} exact component={SignIn}></Route>

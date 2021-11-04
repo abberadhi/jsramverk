@@ -139,7 +139,7 @@ function Home() {
                     </tbody>
                 </table>)}
 
-            <div class="modal fade" id="shareModal" tabindex="-1" role="dialog" aria-labelledby="shareModalLabel" aria-hidden="true">
+            <div class="modal fade" id="shareModal" tabIndex="-1" role="dialog" aria-labelledby="shareModalLabel" aria-hidden="true">
                 <div class="modal-dialog" role="document">
 
                     <div class="modal-content">
