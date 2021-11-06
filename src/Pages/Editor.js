@@ -5,16 +5,14 @@ import Loader from '../components/Loader';
 import CommentSection from '../components/CommentSection';
 import autoSaveTimer from '../utils/autoSaveTimer';
 import { CKEditor } from '@ckeditor/ckeditor5-react';
-import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
+
+import ClassicEditor from 'ckeditor5-abra-build/build/ckeditor';
+// import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 
 
 import axios from 'axios';
 import socketIOClient from "socket.io-client";
 import { UserContext } from '../utils/UserContext';
-// import { emit } from '../../../editorAPI/src/app';
-
-// import Comment from '../comment';
-// import Comment from '@ckeditor/ckeditor5-basic-styles/src/comment';
 
 
 const ENDPOINT = "http://127.0.0.1:1337";
@@ -48,10 +46,7 @@ function Editor () {
     // state for when an syncing is occuring - to avoid false onchange events
     const [isSyncing, setIsSyncing] = useState(false);
 
-    const [comments, setComments] = useState(false);
-
     const { user, setUser } = useContext(UserContext);
-
 
     useEffect(() => {
         axios.post(
@@ -79,7 +74,6 @@ function Editor () {
             myEditor.setData(document.content)
             socket.emit('create', document.id);
 
-            setComments(window.document.getElementsByTagName('comment'));
 
             socket.on('doc', function(data) {
                 setIsSyncing(true);
@@ -98,13 +92,13 @@ function Editor () {
             setIsLoading(false);
             setInitiated(true);
             setIsSyncing(false);
+
         }
     }, [initialDocument, myEditor]);
 
     function saveDocument(text) {
-        document.content = myEditor.getData();
 
-        setComments(window.document.getElementsByTagName('comment'));
+        document.content = myEditor.getData();
 
         socket.emit('sync', {id: document.id, name: text ?? document.name, content: document.content});
         timeoutSave.save(() => {
@@ -126,12 +120,20 @@ function Editor () {
                     'Authorization': `Bearer ${user.token}`
                 },
                 data: {
-                    query: `mutation { editDocument(id: "${temp.id}", content: "${temp.content}", name: "${temp.name}") { id, name, content, updated, created }}`}
+                    query: `mutation editDocument($id:String!, $content:String!, $name:String!) { 
+                        editDocument(id:$id, content:$content, name:$name) { id, name, content, updated, created }
+                    }`,
+                    variables: {
+                        id: temp.id,
+                        content: temp.content,
+                        name: temp.name
+                    }},
             }).then(response => {
                 console.log(response)
             });
 
         }, setIsSaving);
+
     }
 
     return (
@@ -141,6 +143,8 @@ function Editor () {
                     <Loader></Loader> 
                 </div>): null
             }
+
+
             {document ? 
             <Overlay
                 name={document.name}
@@ -150,13 +154,44 @@ function Editor () {
                 saveDocument={saveDocument}
             ></Overlay> : null}
 
+
             <CKEditor
                 data-testid="theEditor"
                 editor={ ClassicEditor }
-                config={ {
-                    // plugins: [ Comment ],
-                    // toolbar: [ 'comment' ]
-                } }
+                config={{
+                    toolbar: {
+                        items: [
+                          "heading",
+                          "|",
+                          "bold",
+                          "italic",
+                          "bulletedList",
+                          "numberedList",
+                          "|",
+                          "outdent",
+                          "indent",
+                          "|",
+                          "imageUpload",
+                          "blockQuote",
+                          "insertTable",
+                          "mediaEmbed",
+                          "undo",
+                          "redo",
+                          "link",
+                        ],
+                      },
+                      htmlSupport: {
+                        allow: [
+                          {
+                            name: /.*/,
+                            attributes: true,
+                            classes: true,
+                            styles: true,
+                          },
+                        ],
+                      },
+                }}
+
                 onReady={ editor => {
                     setMyEditor(editor);
                 } }
@@ -168,11 +203,6 @@ function Editor () {
                     }
                 }}
             />
-            <CommentSection comments={comments}></CommentSection>
-
-
-
-
         </div>
     );
 }

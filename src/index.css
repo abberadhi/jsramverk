@@ -60,6 +60,12 @@ body::-webkit-scrollbar-thumb {
   color: rgb(51, 51, 51);
 }
 
+.ck-content > p > a {
+    background-color: yellow;
+    color: inherit;
+    text-decoration: none;
+}
+
 .Editor {
   margin-left: 5em;
 }
