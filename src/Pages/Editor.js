@@ -6,6 +6,8 @@ import CommentSection from '../components/CommentSection';
 import autoSaveTimer from '../utils/autoSaveTimer';
 import { CKEditor } from '@ckeditor/ckeditor5-react';
 
+import html2pdf from 'html2pdf.js';
+
 import ClassicEditor from 'ckeditor5-abra-build/build/ckeditor';
 // import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 
@@ -136,6 +138,10 @@ function Editor () {
 
     }
 
+    function toPdf() {
+        html2pdf(myEditor.getData());
+    }
+
     return (
         <div className="Editor" data-testid="test-editor">
             {isLoading ?
@@ -152,6 +158,7 @@ function Editor () {
                 updated={document.updated}
                 isSaving={isSaving}
                 saveDocument={saveDocument}
+                toPdf={toPdf}
             ></Overlay> : null}
 
 
