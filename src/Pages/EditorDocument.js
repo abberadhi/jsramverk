@@ -2,7 +2,6 @@ import React, { useState, useEffect, useContext } from 'react';
 import { useParams } from "react-router-dom";
 import Overlay from '../components/Overlay';
 import Loader from '../components/Loader';
-import CommentSection from '../components/CommentSection';
 import autoSaveTimer from '../utils/autoSaveTimer';
 import { CKEditor } from '@ckeditor/ckeditor5-react';
 
@@ -17,6 +16,7 @@ import socketIOClient from "socket.io-client";
 import { UserContext } from '../utils/UserContext';
 
 import CEditor from "@monaco-editor/react";
+import { faDownload } from '@fortawesome/free-solid-svg-icons';
 
 const ENDPOINT = "http://127.0.0.1:1337";
 // const ENDPOINT = "https://jsramverk-editor-abra19.azurewebsites.net";
@@ -160,7 +160,9 @@ function Editor () {
                 updated={document.updated}
                 isSaving={isSaving}
                 saveDocument={saveDocument}
-                toPdf={toPdf}
+                execFunc={toPdf}
+                icon={faDownload}
+                buttonText={" PDF"}
             ></Overlay> : null}
 
             <CKEditor

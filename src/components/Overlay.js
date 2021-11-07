@@ -1,7 +1,6 @@
 import React from 'react';
 import DateUtils from '../utils/DateUtils';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faDownload } from '@fortawesome/free-solid-svg-icons'
 
 import Loader from '../components/Loader';
 
@@ -21,7 +20,7 @@ function Overlay (data) {
                 <p className="created">Created: {DateUtils.relativeSinceDate(parseInt(data.created)) ?? "Untitled"}</p>
             </div>
             <p className="edited">Last updated: {data.isSaving ? <Loader></Loader> : (DateUtils.relativeSinceDate(parseInt(data.updated)) ?? "Untitled")}</p>
-            <button onClick={() => data.toPdf()} className="btn btn-success"><FontAwesomeIcon size="lg" icon={faDownload} /> PDF</button>
+            <button onClick={() => data.execFunc()} className="btn btn-success"><FontAwesomeIcon size="lg" icon={data.icon} /> {data.buttonText}</button>
 
         </div>
     );
