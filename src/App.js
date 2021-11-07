@@ -1,7 +1,8 @@
 import React, { useEffect, useState, useMemo  } from 'react';
 import { Route, BrowserRouter as Router} from "react-router-dom";
 import Nav from './components/Nav';
-import Editor from './Pages/Editor';
+import EditorDocument from './Pages/EditorDocument';
+import EditorCode from './Pages/EditorCode';
 import Home from './Pages/Home';
 import CreateDocument from './Pages/CreateDocument';
 import CreateCode from './Pages/CreateCode';
@@ -29,7 +30,8 @@ function App () {
 
                 <Route path={url("/register")} exact component={Register}></Route>
                 <ProtectedRoute path={url("/")} exact component={Home}></ProtectedRoute>
-                <ProtectedRoute path={url("/editor/:id")} component={Editor}></ProtectedRoute>
+                <ProtectedRoute path={url("/editordocument/:id")} component={EditorDocument}></ProtectedRoute>
+                <ProtectedRoute path={url("/editorcode/:id")} component={EditorCode}></ProtectedRoute>
                 <ProtectedRoute path={url("/createdocument")} component={CreateDocument}></ProtectedRoute>
                 <ProtectedRoute path={url("/createcode")} component={CreateCode}></ProtectedRoute>
             </UserContext.Provider>

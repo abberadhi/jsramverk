@@ -24,7 +24,7 @@ function CreateCode () {
             data: {
                 query: `mutation { editDocument(content: "", name: "Untitled", type: "code") { id, name, content, updated, created }}`}
         }).then(response => {
-            history.push(url("/editor/" + response.data.data.editDocument.id));
+            history.push(url("/editorcode/" + response.data.data.editDocument.id));
         });
 
         // axios.post('/update', {name: "Untitled", content:""})

@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import DateUtils from '../utils/DateUtils';
 import Loader from '../components/Loader';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faTrash, faFile } from '@fortawesome/free-solid-svg-icons'
+import { faTrash, faFile, faCode } from '@fortawesome/free-solid-svg-icons'
 import url from '../utils/url';
 import { UserContext } from '../utils/UserContext';
 
@@ -30,7 +30,7 @@ function Home() {
     function loadDocs() {
         axios.post(
             '/graphql',
-            JSON.stringify({ query: "{ getAllDocuments { id, name, updated, created, creator }}" }),
+            JSON.stringify({ query: "{ getAllDocuments { id, name, updated, type, created, creator }}" }),
             {
                 headers: {
                     'Content-Type': 'application/json',
@@ -97,7 +97,7 @@ function Home() {
                             documents.map(function (doc, index) {
                                 return (
                                     <tr key={doc.id}>
-                                        <td><Link to={url("/editor/" + doc.id)}><FontAwesomeIcon size="lg" icon={faFile}></FontAwesomeIcon>  {doc.name}</Link></td>
+                                        <td><Link to={url(doc.type == "code" ? "/editorcode/" + doc.id : "/editordocument/" + doc.id)}>{doc.type == "code" ? <FontAwesomeIcon size="lg" icon={faCode}></FontAwesomeIcon> : <FontAwesomeIcon size="lg" icon={faFile}></FontAwesomeIcon>}  {doc.name}</Link></td>
                                         <td>{new Date(parseInt(doc.created)).toLocaleString()}</td>
                                         <td>{doc.creator}</td>
                                         <td>{DateUtils.relativeSinceDate(parseInt(doc.updated))}</td>
@@ -109,7 +109,7 @@ function Home() {
                                                 </a>
 
                                                 <div className="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                                                    <Link className="dropdown-item" to={url("/editor/" + doc.id)}>Edit</Link>
+                                                    <Link className="dropdown-item" to={url(doc.type == "code" ? "/editorcode/" + doc.id : "/editordocument/" + doc.id)}>Edit</Link>
                                                     <div className="dropdown-item" data-toggle="modal" data-target="#shareModal" href="#" style={{ cursor: "pointer" }}>Share</div>
                                                     <div className="dropdown-item" style={{ color: "red", cursor: "pointer" }}
                                                         onClick={() => {

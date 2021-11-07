@@ -16,6 +16,7 @@ import axios from 'axios';
 import socketIOClient from "socket.io-client";
 import { UserContext } from '../utils/UserContext';
 
+import CEditor from "@monaco-editor/react";
 
 const ENDPOINT = "http://127.0.0.1:1337";
 // const ENDPOINT = "https://jsramverk-editor-abra19.azurewebsites.net";
@@ -53,7 +54,7 @@ function Editor () {
     useEffect(() => {
         axios.post(
             '/graphql', 
-            JSON.stringify({ query: `{ getDocumentById(id: "${id}") { id, name, content, updated, created }}`}),
+            JSON.stringify({ query: `{ getDocumentById(id: "${id}") { id, name, content, type, updated, created }}`}),
             {headers: {
                 'Content-Type': 'application/json',
                 'Accept': 'application/json',
@@ -66,6 +67,7 @@ function Editor () {
         });
 
         setTimeoutSave(new autoSaveTimer());
+
     }, []);
 
     useEffect(() => {
@@ -160,7 +162,6 @@ function Editor () {
                 saveDocument={saveDocument}
                 toPdf={toPdf}
             ></Overlay> : null}
-
 
             <CKEditor
                 data-testid="theEditor"

@@ -24,7 +24,7 @@ function CreateDocument () {
             data: {
                 query: `mutation { editDocument(content: "", name: "Untitled", type: "document") { id, name, content, updated, created }}`}
         }).then(response => {
-            history.push(url("/editor/" + response.data.data.editDocument.id));
+            history.push(url("/editordocument/" + response.data.data.editDocument.id));
         });
 
         // axios.post('/update', {name: "Untitled", content:""})
