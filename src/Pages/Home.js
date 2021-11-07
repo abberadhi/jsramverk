@@ -65,6 +65,23 @@ function Home() {
             console.log(response)
         });
 
+        axios({
+            url: "/graphql",
+            method: "post",
+            headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json',
+                'Authorization': `Bearer ${user.token}`
+            },
+            data: {
+                query: `mutation { sendMail(id: "${currentDocId}", to: "${email}") { id }}`
+            }
+        }).then(response => {
+            console.log(response)
+        });
+
+
+
         e.target[0].value = ""
     }
 
