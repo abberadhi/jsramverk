@@ -60,7 +60,7 @@ body::-webkit-scrollbar-thumb {
   color: rgb(51, 51, 51);
 }
 
-.ck-content > p > a {
+.ck-content a {
     background-color: yellow;
     color: inherit;
     text-decoration: none;
@@ -108,6 +108,10 @@ body::-webkit-scrollbar-thumb {
 }
 
 .nav-item:first-child {
+  background: var(--bg-seconary);
+}
+
+.nav-item:nth-child(2) {
   background: var(--bg-seconary);
 }
 

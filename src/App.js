@@ -3,7 +3,8 @@ import { Route, BrowserRouter as Router} from "react-router-dom";
 import Nav from './components/Nav';
 import Editor from './Pages/Editor';
 import Home from './Pages/Home';
-import Create from './Pages/Create';
+import CreateDocument from './Pages/CreateDocument';
+import CreateCode from './Pages/CreateCode';
 import SignIn from './Pages/SignIn';
 import Register from './Pages/Register';
 import ProtectedRoute from './components/ProtectedRoute';
@@ -29,7 +30,8 @@ function App () {
                 <Route path={url("/register")} exact component={Register}></Route>
                 <ProtectedRoute path={url("/")} exact component={Home}></ProtectedRoute>
                 <ProtectedRoute path={url("/editor/:id")} component={Editor}></ProtectedRoute>
-                <ProtectedRoute path={url("/create")} component={Create}></ProtectedRoute>
+                <ProtectedRoute path={url("/createdocument")} component={CreateDocument}></ProtectedRoute>
+                <ProtectedRoute path={url("/createcode")} component={CreateCode}></ProtectedRoute>
             </UserContext.Provider>
         </Router>
     );

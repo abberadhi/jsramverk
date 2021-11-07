@@ -5,7 +5,7 @@ import Loader from '../components/Loader';
 import url from '../utils/url';
 import { UserContext } from '../utils/UserContext';
 
-function Create () {
+function CreateDocument () {
     let history = useHistory();
 
     const { user, setUser } = useContext(UserContext);
@@ -22,7 +22,7 @@ function Create () {
                 'Authorization': `Bearer ${user.token}`
             },
             data: {
-                query: `mutation { editDocument(content: "", name: "Untitled") { id, name, content, updated, created }}`}
+                query: `mutation { editDocument(content: "", name: "Untitled", type: "document") { id, name, content, updated, created }}`}
         }).then(response => {
             history.push(url("/editor/" + response.data.data.editDocument.id));
         });
@@ -39,4 +39,4 @@ function Create () {
     );
 }
 
-export default Create;
+export default CreateDocument;

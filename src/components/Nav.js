@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 import { Redirect } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faPlus, faList, faDoorOpen } from '@fortawesome/free-solid-svg-icons'
+import { faFile, faList, faDoorOpen, faCode } from '@fortawesome/free-solid-svg-icons'
 import { Link } from 'react-router-dom';
 import url from '../utils/url';
 import auth from '../utils/auth';
@@ -17,12 +17,18 @@ function Nav (data) {
 
                 <ul className="navbar1-nav">
                     <li className="nav-item add" >
-                        <Link to={url("/create")}>
+                        <Link to={url("/createdocument")}>
                             <div className="nav-link" data-testid="add-link">
-                                <FontAwesomeIcon size="lg" icon={faPlus} />
+                            <FontAwesomeIcon size="lg" icon={faFile} />
                             </div>
                         </Link>
-
+                    </li>
+                    <li className="nav-item add" >
+                        <Link to={url("/createcode")}>
+                            <div className="nav-link" data-testid="add-link">
+                                <FontAwesomeIcon size="lg" icon={faCode} />
+                            </div>
+                        </Link>
                     </li>
                     <li className="nav-item">
                         <Link to={url("/")}>
