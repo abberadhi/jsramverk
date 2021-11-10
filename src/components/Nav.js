@@ -18,14 +18,14 @@ function Nav (data) {
                 <ul className="navbar1-nav">
                     <li className="nav-item add" >
                         <Link to={url("/createdocument")}>
-                            <div className="nav-link" data-testid="add-link">
+                            <div className="nav-link" data-testid="add-document">
                             <FontAwesomeIcon size="lg" icon={faFile} />
                             </div>
                         </Link>
                     </li>
                     <li className="nav-item add" >
                         <Link to={url("/createcode")}>
-                            <div className="nav-link" data-testid="add-link">
+                            <div className="nav-link" data-testid="add-code">
                                 <FontAwesomeIcon size="lg" icon={faCode} />
                             </div>
                         </Link>

@@ -70,17 +70,17 @@ function SignIn (props) {
 
                 <form onSubmit={handleSubmit}> 
                     <div className="container">
-                        <label for="uname"><b>Email</b></label>
+                        <label htmlFor="uname"><b>Email</b></label>
                         <input autoFocus onChange={(e) => setEmail(e.target.value)} type="email" placeholder="Enter Username" name="uname" required></input>
                         
-                        <label for="psw"><b>Password</b></label>
-                        <input type="password" onChange={(e) => setPassword(e.target.value)} placeholder="Enter Password" name="psw" required></input>
+                        <label htmlFor="psw"><b>Password</b></label>
+                        <input data-testid="psw" type="password" onChange={(e) => setPassword(e.target.value)} placeholder="Enter Password" name="psw" required></input>
 
                         <button type="submit" disabled={!validateForm()}>Login</button>
                     </div>
-                    <div class="container">
+                    <div className="container">
                     
-                        <span class="psw">Not registered?  <Link to={url("/register")}>Click here</Link></span>
+                        <span className="psw">Not registered?  <Link to={url("/register")}>Click here</Link></span>
                     </div>
                 </form>            
             </div>) : <Loader></Loader>}

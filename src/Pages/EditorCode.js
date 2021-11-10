@@ -196,7 +196,7 @@ function Editor() {
                     buttonText={" Run"}
                 ></Overlay> : null}
 
-            <div className="blankSpace">
+            <div data-testid="code" className="blankSpace">
 
             </div>
             <CEditor
@@ -229,7 +229,7 @@ function Editor() {
                     }
                 }}
             />
-            <div class="outputlog">
+            <div className="outputlog">
                 <h2>Output: </h2>
                 {outputLog}
             </div>

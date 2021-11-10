@@ -14,6 +14,7 @@
     "ckeditor5-abra-build": "^31.0.0",
     "ckeditor5-gufo-build": "0.0.3",
     "html2pdf.js": "^0.10.1",
+    "jest-canvas-mock": "^2.3.1",
     "moment": "^2.29.1",
     "nodejs-base64": "^2.0.0",
     "react": "^17.0.2",
@@ -26,7 +27,7 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test --detectOpenHandles",
+    "test": "react-scripts test --detectOpenHandles --silent",
     "eject": "react-scripts eject",
     "deploy": "npm run build && rsync -av --delete build/ abra19@ssh.student.bth.se:www/editor"
   },

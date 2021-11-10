@@ -20,7 +20,7 @@ function Overlay (data) {
                 <p className="created">Created: {DateUtils.relativeSinceDate(parseInt(data.created)) ?? "Untitled"}</p>
             </div>
             <p className="edited">Last updated: {data.isSaving ? <Loader></Loader> : (DateUtils.relativeSinceDate(parseInt(data.updated)) ?? "Untitled")}</p>
-            <button onClick={() => data.execFunc()} className="btn btn-success"><FontAwesomeIcon size="lg" icon={data.icon} /> {data.buttonText}</button>
+            <button onClick={() => data.execFunc()} className="btn btn-success" data-testid="actionBtn"><FontAwesomeIcon size="lg" icon={data.icon} /> {data.buttonText}</button>
 
         </div>
     );
